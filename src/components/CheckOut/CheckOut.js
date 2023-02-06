@@ -10,7 +10,6 @@ const checkoutRoot = document.getElementById('checkoutRoot')
 function CheckOut(props) {
 
     const ctx = useContext(CartContext)
-    console.log(ctx.items)
 
     return (
         ReactDOM.createPortal(<div className={classes.CheckOut}>

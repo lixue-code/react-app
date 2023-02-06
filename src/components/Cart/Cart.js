@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import classes from './Cart.module.css'
 import iconImg from '../../assert/bag.png'
 import CartContext from '../../store/CartContext'
@@ -11,6 +11,17 @@ export default function Cart() {
     //控制结账页面的显示隐藏
     const [showCheckout,setShowCheckout] = useState(false)
     const ctx = useContext(CartContext)
+
+    //购物车数量为0，隐藏详情页
+    //useEffect 会在每次dom渲染完调用
+    //useEffect可以传递第二个参数，类型是数组，指定useEffect的依赖（变量，或者函数），只有依赖发生变化，useEffect才会执行
+    useEffect(() => {
+        if(ctx.totalAmount === 0){
+            setShowCartDetials(false)
+            setShowCheckout(false)
+        }
+    },[ctx])
+
     const toggleCartDetials = ()=>{
         if(ctx.totalAmount === 0){
             return
