@@ -20,8 +20,13 @@ export default function Counter(props) {
     const ctx = useContext(CartContext)
     const meal = props.meal
 
-    const onAddHandler = ()=>{
-        ctx.addItem(meal)
+    const onAddHandler = () => {
+        // ctx.addItem(meal)
+        ctx.cartDispatch({type:'ADD',meal:meal})
+    }
+
+    const onRemoveHandle = () => {
+        ctx.cartDispatch({type:'REMOVE',meal:meal})
     }
   return (
     <div className={classes.counter}>
@@ -29,7 +34,7 @@ export default function Counter(props) {
         {
             meal.amount && meal.amount !== 0 ? (
                 <>
-                    <button className={classes.sub} onClick={()=>{ctx.removeItem(meal)}}>
+                    <button className={classes.sub} onClick={onRemoveHandle}>
                         <FontAwesomeIcon icon={faMinus} />
                     </button>
                     <span className={classes.count}>{props.meal.amount}</span>

@@ -12,7 +12,8 @@ const CartContext = React.createContext({
     },
     clearCart: ()=>{
         
-    }
+    },
+    cartDispatch : ()=>{}
 })
 
 export default CartContext

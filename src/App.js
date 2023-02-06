@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useReducer, useState} from 'react'
 import Cart from './components/Cart/Cart'
 import FilterMeals from './components/FilterMeals/FilterMeals'
 import Meals from './components/Meals/Meals'
@@ -51,83 +51,73 @@ const MELAS_DATA = [
     
 ]
 
+const cartReducer = (state,action)=>{
+      //复制购物车
+      const newCart = {...state}
+      switch (action.type){
+          default:
+              return state
+          case 'ADD' :
+              //判断食物是否已经存在
+              if(state.items.indexOf(action.meal) === -1){
+                  action.meal.amount = 1
+                  newCart.items.push(action.meal)
+              }else{
+                  action.meal.amount += 1
+              }
+              //修改商品总数
+              newCart.totalAmount += 1
+              //修改总金额
+              newCart.totalPrice += action.meal.price
+              return newCart
+          case "REMOVE":
+              action.meal.amount -= 1
 
-export default function App() { 
+              if(action.meal.amount === 0){
+                  //从购物车中移除商品
+                  newCart.items.splice(newCart.items.indexOf(action.meal),1)
+              }
+              //修改商品总数
+              newCart.totalAmount -= 1
+              //修改总金额
+              newCart.totalPrice -= action.meal.price
+              return newCart
+          case "CLEAR":
+              newCart.items.forEach(item => delete item.amount)
+              newCart.items = []
+              newCart.totalAmount = 0
+              newCart.totalPrice = 0
+              return newCart
+      }
+}
 
-    /**
-     * 存放食物列表的数据
-     */
+export default function App() {
+    //存放食物列表的数据
     const[meals,setMeals] = useState(MELAS_DATA)
-
-    /**
-     * 存储购物车数据
-     */
-
-    const [cart,setCart] = useState({
+    //存储购物车数据
+    // const [cart,setCart] = useState({
+    //     items:[],
+    //     totalAmount:0,
+    //     totalPrice:0
+    // })
+    //使用reducer改造代码
+    const [cart,cartDispatch] = useReducer(cartReducer,{
         items:[],
         totalAmount:0,
         totalPrice:0
     })
-
-    const addItem = (meal)=>{
-        const newCart = {...cart}
-        //判断食物是否已经存在
-        if(cart.items.indexOf(meal) === -1){
-            meal.amount = 1
-            newCart.items.push(meal)
-        }else{
-            meal.amount += 1
-        }
-
-         //修改商品总数
-         newCart.totalAmount += 1
-         //修改总金额
-         newCart.totalPrice += meal.price
-        setCart(newCart)
-       
-    }
-
-    const removeItem = (meal)=>{
-        const newCart = {...cart}
-        meal.amount -= 1
-
-        if(meal.amount === 0){
-            //从购物车中移除商品
-            newCart.items.splice(newCart.items.indexOf(meal),1)
-        }
-         //修改商品总数
-         newCart.totalAmount -= 1
-         //修改总金额
-         newCart.totalPrice -= meal.price
-         setCart(newCart)
-    }
-
     //过滤食物列表的方法
     const filterMeals = (keyword)=>{
         const newMealsData = MELAS_DATA.filter(item => item.title.includes(keyword))
         setMeals(newMealsData)
     }
 
-    //清空购物车
-    const clearCart = ()=>{
-        const newCart = {...cart}
-        //清空所有meal的amount
-        newCart.items.forEach(item => delete item.amount)
-        newCart.items = []
-        newCart.totalAmount = 0
-        newCart.totalPrice = 0
-        setCart(newCart)
-    }
-
     return (
-        <CartContext.Provider value={{...cart,addItem,removeItem,clearCart}}>
+        <CartContext.Provider value={{...cart,cartDispatch}}>
             <div>
-            
                 <FilterMeals onSearch={filterMeals}></FilterMeals>
                 <Meals meals={meals}></Meals>
                 <Cart></Cart>
-                
-                
             </div>
         </CartContext.Provider>
       

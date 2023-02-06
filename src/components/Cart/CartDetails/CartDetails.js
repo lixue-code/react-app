@@ -19,7 +19,8 @@ export default function CartDetails() {
 
     const onOkHandle = ()=>{
         //清空购物车
-        ctx.clearCart()
+        // ctx.clearCart()
+        ctx.cartDispatch({type:'CLEAR'})
         // setShowConfirm(false)
         // props.toggleCartDetials()
         
