@@ -15,12 +15,14 @@ export default function Cart() {
     //购物车数量为0，隐藏详情页
     //useEffect 会在每次dom渲染完调用
     //useEffect可以传递第二个参数，类型是数组，指定useEffect的依赖（变量，或者函数），只有依赖发生变化，useEffect才会执行
+    //useEffect中用到哪些，就需要把谁添加到依赖当中
+    //如果依赖项设置了空数组，表示只会在初始化的时候执行一次
     useEffect(() => {
         if(ctx.totalAmount === 0){
             setShowCartDetials(false)
             setShowCheckout(false)
         }
-    },[ctx])
+    },[ctx,setShowCartDetials,setShowCheckout])
 
     const toggleCartDetials = ()=>{
         if(ctx.totalAmount === 0){
