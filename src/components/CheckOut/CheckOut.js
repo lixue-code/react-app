@@ -33,6 +33,7 @@ function CheckOut(props) {
 
         </div>,checkoutRoot)
     //     test commit
+//test fetch
     );
 }
 
