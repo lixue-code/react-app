@@ -1,0 +1,31 @@
+.CheckoutItem{
+    display: flex;
+    align-items: center;
+
+}
+
+.ImgBox{
+    width: 4rem;
+}
+
+.ImgBox img{
+    width: 100%;
+}
+
+.Desc{
+    flex: auto;
+    margin-left: 2rem;
+    padding-right: 2rem;
+}
+
+.PriceOuter{
+    display: flex;
+    justify-content: space-between;
+}
+.Price{
+    font-size: 1.2rem;
+}
+.Price::before{
+    content: '￥';
+    font-size: 0.7rem;
+}

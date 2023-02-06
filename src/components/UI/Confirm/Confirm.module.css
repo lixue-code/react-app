@@ -1,0 +1,36 @@
+.ConfirmBackDrop{
+    z-index: 99999;
+}
+.ConfirmBox{
+    position: absolute;
+    width: 90%;
+    height: 10rem;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-radius: 20px;
+    background-color:white;
+}
+
+.ConfirmText{
+    font-size: 1.5rem;
+}
+
+.OkBtn,.CancelBtn{
+    border: 1px solid #ccc;
+    width: 7rem;
+    height: 2rem;
+    border-radius: 20px;
+    font-size: 1rem;
+}
+
+.OkBtn{
+    background-color: #FCBF49;
+    margin-left: 2rem;
+}

@@ -1,0 +1,37 @@
+.FilterMeals{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: fixed;
+   left: 0;
+   right: 0;
+   height: 4rem;
+   /* background-color: #bfa; */
+   border-bottom: 1px solid #f2f2f2;
+   z-index: 990;
+   
+}
+
+.inputOuter{
+    /* background-color: #bfa; */
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.SearchInput{
+    width: 20rem;
+    height: 2rem;
+    border: none;
+    border-radius: 14px;
+    background-color: #f2f2f2;
+    padding-left: 2rem;
+    font-size: 14px;
+    /* outline: none; */
+}
+
+.SearchIcon{
+    position: absolute;
+    left: 0.5rem;
+    color: #aaa;
+}

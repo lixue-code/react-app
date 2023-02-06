@@ -1,0 +1,8 @@
+.meals{
+    position: absolute;
+    top: 4rem;
+    bottom: 0;
+    /* background-color: #bfa; */
+    overflow: auto;
+    padding-bottom: 4.5rem;
+}
